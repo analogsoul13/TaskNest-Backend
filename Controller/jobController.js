@@ -2,6 +2,9 @@ const Job = require('../Models/jobModel')
 
 exports.createJob = async (req, res) => {
     try {
+        if (req.user.role !== "client") {
+            return res.status(403).json(({ message: "Only clients can post jobs" }))
+        }
         const { title, description, category, budget, deadline } = req.body
 
         if (!title || !description || !category || !budget || !deadline) {
