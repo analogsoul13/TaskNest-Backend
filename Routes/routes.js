@@ -2,6 +2,7 @@ const express = require('express')
 const authController = require('../Controller/authController')
 const userController = require('../Controller/userController')
 const jobController = require('../Controller/jobController')
+const jobApplicationController = require('../Controller/jobApplicationController')
 const { jwtMiddleware } = require('../Middlewares/jwtMiddleware')
 
 const router = express.Router()
@@ -17,5 +18,8 @@ router.get('/jobs', jobController.getJobs)
 router.get('/jobs/:id', jobController.getJobsById)
 router.put('/jobs/:id', jwtMiddleware, jobController.updateJob)
 router.delete('/jobs/:id', jwtMiddleware, jobController.deleteJob)
+
+router.post('/applications/apply', jwtMiddleware, jobApplicationController.applyJob )
+router.get('/applications', jwtMiddleware, jobApplicationController.getApplications)
 
 module.exports = router         
