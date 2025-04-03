@@ -19,7 +19,8 @@ router.get('/jobs/:id', jobController.getJobsById)
 router.put('/jobs/:id', jwtMiddleware, jobController.updateJob)
 router.delete('/jobs/:id', jwtMiddleware, jobController.deleteJob)
 
-router.post('/applications/apply', jwtMiddleware, jobApplicationController.applyJob )
+router.post('/jobs/apply', jwtMiddleware, jobApplicationController.applyJob )
 router.get('/applications', jwtMiddleware, jobApplicationController.getApplications)
+router.put('/applications/status/:applicationId', jwtMiddleware, jobApplicationController.updateApplicationStatus)
 
 module.exports = router         
