@@ -41,4 +41,4 @@ TaskNest connects **recruiters** with **freelancers** for short-term tasks, gigs
 ## 📌 Getting Started  
 1. **Clone the repo**:  
    ```bash  
-   git clone https://github.com/yourusername/tasknest.git  
+   git clone https://github.com/analogsoul13/TaskNest-Backend 
