@@ -16,5 +16,6 @@ router.post('/jobs', jwtMiddleware, jobController.createJob)
 router.get('/jobs', jobController.getJobs)
 router.get('/jobs/:id', jobController.getJobsById)
 router.put('/jobs/:id', jwtMiddleware, jobController.updateJob)
+router.delete('/jobs/:id', jwtMiddleware, jobController.deleteJob)
 
 module.exports = router         

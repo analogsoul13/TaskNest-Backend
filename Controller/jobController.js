@@ -65,3 +65,23 @@ exports.updateJob = async (req, res) => {
         res.status(500).json({ message: "Server error", error: error.message })
     }
 }
+
+exports.deleteJob = async (req, res) => {
+    try {
+        const job = await Job.findById(req.params.id)
+
+        if (!job) {
+            return res.status(400).json({ message: "Job not found" })
+        }
+
+        if (job.postedBy.toString() !== req.user.id) {
+            return res.status(403).json({ message: "Not authorized to delete this job!" })
+        }
+
+        await Job.findByIdAndDelete(req.params.id)
+        res.status(200).json({ message: "Job deleted succesfully" })
+
+    } catch (error) {
+        res.status(500).json({ message: "Server Error", error: error.message })
+    }
+}
