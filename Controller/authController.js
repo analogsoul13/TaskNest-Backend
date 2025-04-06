@@ -28,7 +28,7 @@ exports.loginUser = async (req, res) => {
     try {
         const { email, password } = req.body
         if (!email || !password) {
-            res.status(406).json({ message: 'All fields required!' })
+            return res.status(406).json({ message: 'All fields required!' })
         }
 
         const user = await User.findOne({ email })
@@ -41,7 +41,7 @@ exports.loginUser = async (req, res) => {
             expiresIn: '1h'
         })
 
-        res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role } })
+        res.json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role, profilePic: user.profilePic } })
 
     } catch (error) {
         res.status(500).json({message: 'Server Error!!'})

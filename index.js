@@ -6,7 +6,11 @@ const router = require('./Routes/routes')
 
 const tasknetServer = express()
 
-tasknetServer.use(cors())
+tasknetServer.use(cors({
+    origin: "http://localhost:5173",  // Allow frontend requests
+    credentials: true  // Allow cookies & authentication headers
+}));
+
 tasknetServer.use(express.json())
 
 
