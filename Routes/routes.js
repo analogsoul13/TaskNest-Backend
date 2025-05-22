@@ -11,7 +11,7 @@ router.post('/register', authController.registerUser)
 router.post('/login', authController.loginUser)
 
 router.get('/profile', jwtMiddleware, userController.getUserProfile)
-router.get('/profile', jwtMiddleware, userController.updateUserProfile)
+router.put('/profile', jwtMiddleware, userController.updateUserProfile)
 
 router.post('/jobs', jwtMiddleware, jobController.createJob)
 router.get('/jobs', jobController.getJobs)
