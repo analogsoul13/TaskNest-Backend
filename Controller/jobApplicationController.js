@@ -44,7 +44,14 @@ exports.getApplications = async (req, res) => {
         if (userRole === "freelancer") {
             // Freelancer sees their applied jobs
             applications = await JobApplication.find({ candidateId: userId })
-                .populate("jobId", "title description budget")
+                .populate({
+                    path: "jobId",
+                    select: "title description budget deadline postedBy",
+                    populate: {
+                        path: "postedBy",
+                        select: "name email"
+                    }
+                })
                 .populate("candidateId", "name email")
                 .select("jobId candidateId status createdAt")
         } else if (userRole === "client") {
