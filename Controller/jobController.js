@@ -79,6 +79,16 @@ exports.getJobs = async (req, res) => {
     }
 }
 
+exports.getMyJobs = async (req, res) => {
+    try {
+        const clientId = req.user.id
+        const myJobs = await Job.find({ postedBy: clientId })
+        res.status(200).json(myJobs)
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch your jobs", error: error.message })
+    }
+}
+
 exports.getJobsById = async (req, res) => {
     try {
         const job = await Job.findById(req.params.id).populate("postedBy", "name email")

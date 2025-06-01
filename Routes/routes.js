@@ -15,11 +15,12 @@ router.put('/profile', jwtMiddleware, userController.updateUserProfile)
 
 router.post('/jobs', jwtMiddleware, jobController.createJob)
 router.get('/jobs', jobController.getJobs)
+router.get('/myjobs', jwtMiddleware, jobController.getMyJobs)
 router.get('/jobs/:id', jobController.getJobsById)
 router.put('/jobs/:id', jwtMiddleware, jobController.updateJob)
 router.delete('/jobs/:id', jwtMiddleware, jobController.deleteJob)
 
-router.post('/jobs/apply', jwtMiddleware, jobApplicationController.applyJob )
+router.post('/jobs/apply', jwtMiddleware, jobApplicationController.applyJob)
 router.get('/applications', jwtMiddleware, jobApplicationController.getApplications)
 router.put('/applications/status/:applicationId', jwtMiddleware, jobApplicationController.updateApplicationStatus)
 
