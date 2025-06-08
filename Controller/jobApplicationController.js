@@ -62,7 +62,7 @@ exports.getApplications = async (req, res) => {
 
             applications = await JobApplication.find({ jobId: { $in: jobIds } })  //$in for multiple values
                 .populate("jobId", "title description budget")
-                .populate("candidateId", "name email")
+                .populate("candidateId", "name email profilePic")
                 .select("jobId candidateId status createdAt")
         } else {
             return res.status(403).json({ message: "Unauthorized" })
