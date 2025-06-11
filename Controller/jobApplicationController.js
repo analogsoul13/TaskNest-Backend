@@ -80,8 +80,8 @@ exports.updateApplicationStatus = async (req, res) => {
         const { status } = req.body
         const recruiterId = req.user.id
 
-        const validStatuses = ["pending", "accepted", "rejected"]
-        if (validStatuses.includes(status)) {
+        const validStatuses = ["Pending", "Accepted", "Rejected"]
+        if (!validStatuses.includes(status)) {
             return res.status(400).json({ message: "Invalid status value" })
         }
 
@@ -96,6 +96,16 @@ exports.updateApplicationStatus = async (req, res) => {
 
         application.status = status
         await application.save()
+
+        if (status === "Accepted") {
+            await JobApplication.updateMany(
+                {
+                    jobId: application.jobId._id,
+                    _id: { $ne: application._id }
+                },
+                { $set: { status: "Rejected" } }
+            );
+        }
 
         res.status(200).json({ message: "Application status updated succesfully", application })
 
