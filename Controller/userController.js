@@ -17,14 +17,14 @@ exports.getUserProfile = async (req, res) => {
 // Update user profile
 exports.updateUserProfile = async (req, res) => {
     try {
-        const { name, bio, profilePicture } = req.body
+        const { name, bio, profilePic } = req.body
         const user = await User.findById(req.user.id)
 
         if (!user) return res.status(404).json({ message: "User not found!!" })
 
         if (name) user.name = name;
         if (bio) user.bio = bio;
-        if (profilePicture) user.profilePic = profilePicture
+        if (profilePic) user.profilePic = profilePic
 
         await user.save()
         res.status(200).json({ message: "Profile updated succesfully", user })
