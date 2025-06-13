@@ -6,13 +6,7 @@ const router = require('./Routes/routes')
 
 const tasknetServer = express()
 
-tasknetServer.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "https://task-nest-frontend.vercel.app"
-    ],  // Allow frontend requests
-    credentials: true  // Allow cookies & authentication headers
-}));
+tasknetServer.use(cors({ origin: '*' }));
 
 tasknetServer.use(express.json())
 
